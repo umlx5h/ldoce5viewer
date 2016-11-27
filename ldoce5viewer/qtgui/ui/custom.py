@@ -88,6 +88,25 @@ class LineEdit(QLineEdit):
                 rect.width() - framewidth - 3 - ICONSIZE - 1,
                 (rect.height() - ICONSIZE) / 2 - 1)
 
+    def keyPressEvent(self, event):
+        osx = sys.platform.startswith('darwin')
+        if osx and event.modifiers() == Qt.MetaModifier:
+            print event.key(), Qt.Key_A, Qt.Key_F
+            if event.key() == Qt.Key_A:
+                return self.home(self.hasSelectedText())
+            elif event.key() == Qt.Key_E:
+                return self.end(self.hasSelectedText())
+            elif event.key() == Qt.Key_K:
+                self.setSelection(self.cursorPosition(),
+                                  len(self.text()) - self.cursorPosition())
+                return self.cut()
+            elif event.key() == Qt.Key_F:
+                return self.cursorForward(self.hasSelectedText())
+            elif event.key() == Qt.Key_B:
+                return self.cursorBackward(self.hasSelectedText())
+
+        super(LineEdit, self).keyPressEvent(event)
+
     def __onTextChanged(self, text):
         self._buttonClear.setVisible(bool(text))
 
