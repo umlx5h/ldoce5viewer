@@ -1191,7 +1191,7 @@ class MainWindow(QMainWindow):
         ui.actionFindPrev.setShortcuts(QKeySequence.FindPrevious)
         ui.actionZoomIn.setShortcuts(QKeySequence.ZoomIn)
         ui.actionZoomOut.setShortcuts(QKeySequence.ZoomOut)
-        ui.actionPrint.setShortcuts(QKeySequence('Ctrl+9'))
+        ui.actionPrint.setShortcuts(QKeySequence.Print)
         ui.actionNormalSize.setShortcut(QKeySequence('Ctrl+0'))
         ui.actionFocusLineEdit.setShortcut(QKeySequence('Ctrl+L'))
         wp.action(QWebPage.SelectAll).setShortcut(QKeySequence('Ctrl+A'))
