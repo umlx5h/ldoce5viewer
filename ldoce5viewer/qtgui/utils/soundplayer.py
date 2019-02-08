@@ -6,6 +6,7 @@ import logging
 
 from PyQt4.QtCore import *
 from ...utils.compat import range
+import subprocess
 
 _logger = logging.getLogger(__name__)
 
@@ -273,10 +274,36 @@ class AppKitBackend(Backend):
         self.stop()
 
 
+class AfplayBackend(Backend):
+    def __init__(self, parent, temp_dir):
+        self._path = None
+
+    def stop(self):
+        if self._path:
+            subprocess.Popen(['killall', 'afplay'])
+            self._path = None
+
+    def play(self, data):
+        if self._path:
+            self.stop()
+
+        with NamedTemporaryFile(mode='w+b', prefix='',
+            suffix='.tmp.mp3', delete=False) as f:
+            f.write(data)
+            self._path = f.name
+
+        subprocess.Popen(['afplay', '-q', '1', self._path])
+
+    def close(self):
+        self.stop()
+
+
 def create_soundplayer(parent, temp_dir):
     backends = []
-    if AppKit:
-        backends.append(AppKitBackend)
+    if sys.platform.startswith('darwin'):
+        backends.append(AfplayBackend)
+    # if AppKit:
+    #     backends.append(AppKitBackend)
     if mp3play:
         backends.append(WinMCIBackend)
     if Phonon:
