@@ -210,11 +210,11 @@ class MainWindow(QMainWindow):
         le = self._ui.lineEditSearch
 
         if key == Qt.Key_Down or \
-                (key == Qt.Key_J and modifiers == ctrl) or \
+                (key == Qt.Key_N and modifiers == ctrl) or \
                 (key == Qt.Key_Return and modifiers == Qt.NoModifier):
             self.selectItemRelative(1)
         elif key == Qt.Key_Up or \
-                (key == Qt.Key_K and modifiers == ctrl) or \
+                (key == Qt.Key_P and modifiers == ctrl) or \
                 (key == Qt.Key_Return and modifiers == Qt.ShiftModifier):
             self.selectItemRelative(-1)
         elif key == Qt.Key_Backspace:
@@ -224,6 +224,14 @@ class MainWindow(QMainWindow):
                 Qt.Key_Home, Qt.Key_End):
             self._ui.webView.setFocus()
             self._ui.webView.keyPressEvent(event)
+        elif (key == Qt.Key_J and modifiers == ctrl):
+            self._ui.webView.setFocus()
+            self._ui.webView.keyPressEvent(QKeyEvent(QEvent.KeyPress,
+                                                    Qt.Key_Down, Qt.NoModifier))
+        elif (key == Qt.Key_K and modifiers == ctrl):
+            self._ui.webView.setFocus()
+            self._ui.webView.keyPressEvent(QKeyEvent(QEvent.KeyPress,
+                                                    Qt.Key_Up, Qt.NoModifier))
         elif event.text().isalnum():
             le.setFocus()
             le.setText(event.text())
@@ -240,11 +248,11 @@ class MainWindow(QMainWindow):
 
         if (not event.isAutoRepeat()) and mouse_buttons == Qt.NoButton:
             if key == Qt.Key_Down or \
-                    (key == Qt.Key_J and modifiers == ctrl) or \
+                    (key == Qt.Key_N and modifiers == ctrl) or \
                     (key == Qt.Key_Return and modifiers == Qt.NoModifier):
                 self._loadItem()
             elif key == Qt.Key_Up or \
-                 (key == Qt.Key_K and modifiers == ctrl) or \
+                 (key == Qt.Key_P and modifiers == ctrl) or \
                  (key == Qt.Key_Return and modifiers == Qt.ShiftModifier):
                 self._loadItem()
 
@@ -1183,7 +1191,7 @@ class MainWindow(QMainWindow):
         ui.actionFindPrev.setShortcuts(QKeySequence.FindPrevious)
         ui.actionZoomIn.setShortcuts(QKeySequence.ZoomIn)
         ui.actionZoomOut.setShortcuts(QKeySequence.ZoomOut)
-        ui.actionPrint.setShortcuts(QKeySequence.Print)
+        ui.actionPrint.setShortcuts(QKeySequence('Ctrl+9'))
         ui.actionNormalSize.setShortcut(QKeySequence('Ctrl+0'))
         ui.actionFocusLineEdit.setShortcut(QKeySequence('Ctrl+L'))
         wp.action(QWebPage.SelectAll).setShortcut(QKeySequence('Ctrl+A'))
