@@ -447,6 +447,7 @@
     <addaction name="actionNormalSize"/>
     <addaction name="separator"/>
     <addaction name="actionMonitorClipboard"/>
+    <addaction name="actionDarkmode"/>
     <addaction name="separator"/>
     <addaction name="actionPronOff"/>
     <addaction name="actionPronGB"/>
@@ -648,6 +649,14 @@
    </property>
    <property name="text">
     <string>Monitor Clipboard</string>
+   </property>
+  </action>
+  <action name="actionDarkmode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Enable Dark mode</string>
    </property>
   </action>
   <action name="actionSearchExamples">

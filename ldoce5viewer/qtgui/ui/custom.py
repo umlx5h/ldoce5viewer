@@ -6,6 +6,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtWebKit import *
 from ...utils.text import ellipsis
+from ..config import get_config
 
 
 DisplayRole = Qt.DisplayRole
@@ -157,8 +158,14 @@ class HtmlListWidget(QListWidget):
 
     def __init__(self, parent):
         super(HtmlListWidget, self).__init__(parent)
-        QListWidget.setStyleSheet(self,
+        config = get_config()
+        if config['darkmode']:
+            QListWidget.setStyleSheet(self,
+                "QListWidget{background-color: black;}")
+        else:
+            QListWidget.setStyleSheet(self,
                 "QListWidget{background-color: white;}")
+
         self._item_delegate = HtmlListWidget.HtmlItemDelegate(parent)
         self.setItemDelegate(self._item_delegate)
 
@@ -174,8 +181,12 @@ class WebView(QWebView):
 
     def __init__(self, parent):
         super(WebView, self).__init__(parent)
+        config = get_config()
 
-        self.setStyleSheet("QWebView{background-color: white;}")
+        if config['darkmode']:
+            self.setStyleSheet("QWebView{background-color: black;}")
+        else:
+            self.setStyleSheet("QWebView{background-color: white;}")
 
         self._actionSearchText = QAction(self)
         if sys.platform != "darwin":

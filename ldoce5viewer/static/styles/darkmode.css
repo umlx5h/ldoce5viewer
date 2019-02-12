@@ -1,0 +1,134 @@
+/* common.css */
+body {
+    color: white !important;
+    background-color: #1e1f22 !important;
+}
+
+.gram,
+.geo, .label,
+.registerlab,
+.origin {
+    color: #0bad60;
+}
+
+a,
+.a .e {
+    color: #2aa6a6;    
+}
+
+/* entry.css */
+.example {
+    color: #ddd !important;
+}
+.assets {
+    background: #333;
+    position: relative;
+    z-index: 2;
+}
+.assethead {
+    color: #ddd;
+}
+.propform, .propformprep, .collo, .thespropform,
+.lexunit, .sense .lexvar,
+.phrvbhwd
+{
+    color: #994200;
+}
+.synopp {
+    background-color: #984100;
+}
+.freq, .ac {
+    /* background-color: yellow; */
+}
+.sensenum {
+    /* background-color: paleturquoise; */
+}
+.signpost {
+    /* background-color: yellow; */
+}
+.thesbox {
+    /* background-color: yellow; */
+}
+.collobox {
+    /* background-color: paleturquoise; */
+}
+/* .assethead:after { background-color: yellow; } */
+/* .assets-thes .assethead:after { background-color: paleturquoise; } */
+
+.sensenum,
+.thesbox .thesexa .base,
+.collobox .collexa .base {
+    color: #33b1b1;
+}
+
+/* activator.css */
+@media screen {
+#section .exponent:target {
+    background: -webkit-gradient(linear, center top, center bottom,
+                            from(#444444), to(#444448));
+                            
+    /* box-shadow: 0 1px 5px #ccb; */
+}
+} /* END @media screen */
+
+#concept .section a {
+    background: -webkit-gradient(linear, left top, left bottom,
+                        color-stop(0%,#444), color-stop(100%,#333));
+    color: #ddd;
+}
+
+#concept .sel a {
+    background: -webkit-gradient(linear, left top, left bottom,
+                        color-stop(0%, #666), color-stop(100%,#777));
+    color: #ddd;
+}
+
+/* collocations.css */
+.collexa {
+    color: #ddd;
+}
+
+@media screen {
+    .lexunit:target,
+    .lexvar:target,
+    .orthvar:target,
+    .propform:target,
+    .propformprep:target,
+    .collo:target,
+    .example:target,
+    .colloc:target,
+    .deriv:target,
+    .phrvbentry:target .phrvbhwd {
+        border-radius: 0;
+        background: -webkit-gradient(linear, center top, center bottom,
+                                from(#777), to(#666));
+        box-shadow: none;
+        outline: solid 4px #ccc;
+        position: relative;
+        z-index: 1;
+    }
+    .sense:target,
+    .collocate:target,
+    .exponent:target {
+        border-radius: 0;
+        background: -webkit-gradient(linear, center top, center bottom,
+                                from(#777), to(#666));
+        box-shadow: none;
+        outline: solid 4px #ccc;
+        position: relative;
+        z-index: 1;
+    }
+} /* end of @media screen */
+
+/* search.css */
+ul.r_examples a, ul.r_definitions a {
+    color: #ddd;
+    border: 1px solid #ba9;
+    box-shadow: 0 1px 2px #333;
+}
+ul.r_examples a:hover, ul.r_definitions a:hover {
+    background-color: #666;
+    background: -webkit-gradient(linear, center top, center bottom,
+                            from(#666666), to(#696969));
+    box-shadow: 0 1px 2px #ccc;
+}

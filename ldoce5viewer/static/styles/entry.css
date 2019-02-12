@@ -280,7 +280,7 @@ span.heading {
     border-radius: 4px;
     background: -webkit-gradient(linear, center top, center bottom,
                             from(#ffffcc), to(#ffffbb));
-    box-shadow: 0 0 8px #ffffbb;
+    box-shadow: 0 0 4px #ffffbb;
 }
 .sense:target,
 .collocate:target,
@@ -288,7 +288,7 @@ span.heading {
     border-radius: 4px;
     background: -webkit-gradient(linear, center top, center bottom,
                             from(#ffffdd), to(#ffffcc));
-    box-shadow: 0 0 8px #ffffcc;
+    box-shadow: 0 0 4px #ffffcc;
 }
 } /* end of @media screen */
 

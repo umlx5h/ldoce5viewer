@@ -80,6 +80,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
 
+        config = get_config()
+
         self._okToClose = False
         #systray = QSystemTrayIcon(self)
         #systray.setIcon(QIcon(":/icons/icon.png"))
@@ -132,9 +134,13 @@ class MainWindow(QMainWindow):
 
         # Stylesheet for the item list pane
         try:
-            self._ui.listWidgetIndex.setStyleSheet(
-                    _load_static_data('styles/list.css')\
-                            .decode('utf-8', 'ignore'))
+            style = ''
+            if config['darkmode']:
+                style = _load_static_data('styles/listdark.css').decode('utf-8', 'ignore')
+            else:
+                style = _load_static_data('styles/list.css').decode('utf-8', 'ignore')
+
+            self._ui.listWidgetIndex.setStyleSheet(style)
         except EnvironmentError:
             pass
 
@@ -724,6 +730,10 @@ class MainWindow(QMainWindow):
         get_config()['monitorClipboard'] = \
                 self._ui.actionMonitorClipboard.isChecked()
 
+    def _onDarkmodeChanged(self):
+        get_config()['darkmode'] = \
+                self._ui.actionDarkmode.isChecked()
+
     def _onPaste(self):
         clipboard = QApplication.clipboard()
         text = clipboard.text(QClipboard.Clipboard)
@@ -955,6 +965,7 @@ class MainWindow(QMainWindow):
     #-------
 
     def _setup_ui(self):
+        config = get_config()
         ui = self._ui = Ui_MainWindow()
         ui.setupUi(self)
 
@@ -979,6 +990,10 @@ class MainWindow(QMainWindow):
         ui.lineEditSearch.setPlaceholderText("Search...")
         ui.lineEditSearch.setInputMethodHints(
                 Qt.ImhUppercaseOnly | Qt.ImhLowercaseOnly | Qt.ImhDigitsOnly)
+        if config['darkmode']:
+            style = "QLineEdit { background-color: black; color: white; }"
+            ui.lineEditSearch.setStyleSheet(style)
+
         toolBar.addWidget(ui.toolButtonNavBack)
         toolBar.addWidget(ui.toolButtonNavForward)
         toolBar.addWidget(ui.lineEditSearch)
@@ -1145,6 +1160,7 @@ class MainWindow(QMainWindow):
         act_conn(ui.actionZoomOut, partial(self.setZoom, -1, relative=True))
         act_conn(ui.actionNormalSize, partial(self.setZoom, 0))
         act_conn(ui.actionMonitorClipboard, self._onMonitorClipboardChanged)
+        act_conn(ui.actionDarkmode, self._onDarkmodeChanged)
         act_conn(ui.actionFind,
                 partial(self.setFindbarVisible, visible=True))
         act_conn(ui.actionFindClose,
@@ -1236,6 +1252,12 @@ class MainWindow(QMainWindow):
         try:
             ui.actionMonitorClipboard.setChecked(
                 config.get('monitorClipboard', False))
+        except:
+            pass
+
+        try:
+            ui.actionDarkmode.setChecked(
+                config.get('darkmode', False))
         except:
             pass
 

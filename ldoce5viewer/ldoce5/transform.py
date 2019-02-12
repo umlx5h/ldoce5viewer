@@ -13,6 +13,7 @@ import lxml.etree as et
 from .transform_body import body2html, _trans_assets
 from .utils import shorten_id
 from ..utils.text import enc_utf8
+from ..qtgui.config import get_config
 
 
 def _get_text_r(e):
@@ -64,6 +65,10 @@ def _build_header(resnames, title=None, meta={}):
              'rel="stylesheet" type="text/css">\n'.format(name))
         r.append('<script type="application/javascript" '
                 'src="static:///scripts/{0}.js" ></script>\n'.format(name))
+
+    if get_config()['darkmode']:
+        r.append('<link href="static:///styles/darkmode.css" '
+            'rel="stylesheet" type="text/css">\n')
 
     if title:
         r.append('<title>{0}</title>\n'.format(title))

@@ -176,16 +176,20 @@ ADV_HEADER = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="static:///styles/search.css">
 <script src="static:///scripts/jquery.js"></script>
 <script src="static:///scripts/search.js"></script>
-</head>
-<body>"""
+<link rel="stylesheet" href="static:///styles/search.css">"""
 
 
 def _render_header(title, mode, phrase, filters):
+    config = get_config()
     r = []
     r.append(ADV_HEADER)
+    if config['darkmode']:
+        r.append('<link rel="stylesheet" href="static:///styles/darkmode.css">')
+
+    r.append('</head>')
+    r.append('<body>')
     r.append('<h1>{0}</h1>'.format(title))
     r.append('<ul class="nav">\n')
 
